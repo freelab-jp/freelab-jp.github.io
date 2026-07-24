@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>フリラボ | 収入不安定リスク診断</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --card:#ffffff;
+    --accent:#2b6cb0;
+    --accent2:#e07a3f;
+    --text:#1a1a1a;
+    --muted:#6b7280;
+    --green:#2e7d32;
+    --yellow:#b8860b;
+    --orange:#d9622b;
+    --red:#c62828;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",sans-serif;
+    background:linear-gradient(180deg,#101828 0%,#1b2440 100%);
+    color:var(--text);
+    min-height:100vh;
+    padding:24px 12px 60px;
+  }
+  .wrap{
+    max-width:640px;
+    margin:0 auto;
+  }
+  header{
+    text-align:center;
+    color:#fff;
+    margin-bottom:20px;
+  }
+  header .logo{
+    font-size:14px;
+    letter-spacing:0.2em;
+    opacity:0.7;
+    margin-bottom:6px;
+  }
+  header h1{
+    font-size:24px;
+    margin:0 0 8px;
+    line-height:1.4;
+  }
+  header p{
+    font-size:13px;
+    opacity:0.8;
+    margin:0;
+    line-height:1.6;
+  }
+  .card{
+    background:var(--card);
+    border-radius:16px;
+    padding:24px 20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);
+    margin-bottom:16px;
+  }
+  .progress-bar{
+    width:100%;
+    height:6px;
+    background:#e5e7eb;
+    border-radius:3px;
+    overflow:hidden;
+    margin-bottom:18px;
+  }
+  .progress-fill{
+    height:100%;
+    background:var(--accent);
+    width:0%;
+    transition:width .3s ease;
+  }
+  .q-block{
+    margin-bottom:26px;
+    padding-bottom:22px;
+    border-bottom:1px solid #eee;
+  }
+  .q-block:last-of-type{
+    border-bottom:none;
+    margin-bottom:8px;
+  }
+  .q-num{
+    display:inline-block;
+    background:var(--accent);
+    color:#fff;
+    font-size:12px;
+    padding:2px 8px;
+    border-radius:10px;
+    margin-bottom:8px;
+  }
+  .q-text{
+    font-size:15px;
+    font-weight:700;
+    line-height:1.6;
+    margin:0 0 12px;
+  }
+  .options label{
+    display:flex;
+    align-items:flex-start;
+    gap:8px;
+    padding:10px 12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    margin-bottom:8px;
+    cursor:pointer;
+    font-size:14px;
+    line-height:1.5;
+    transition:border-color .15s, background .15s;
+  }
+  .options label:hover{
+    border-color:var(--accent);
+    background:#f5f9ff;
+  }
+  .options input{
+    margin-top:3px;
+    flex-shrink:0;
+  }
+  .options label.selected{
+    border-color:var(--accent);
+    background:#eaf2fb;
+  }
+  #submitBtn{
+    display:block;
+    width:100%;
+    padding:14px;
+    font-size:16px;
+    font-weight:700;
+    color:#fff;
+    background:var(--accent2);
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    margin-top:10px;
+  }
+  #submitBtn:disabled{
+    background:#c9c9c9;
+    cursor:not-allowed;
+  }
+  #submitBtn:not(:disabled):hover{
+    filter:brightness(1.05);
+  }
+  .hint{
+    font-size:12px;
+    color:var(--muted);
+    text-align:center;
+    margin-top:8px;
+  }
+  /* --- result --- */
+  #result{
+    display:none;
+  }
+  .score-badge{
+    text-align:center;
+    padding:18px 10px 22px;
+  }
+  .score-badge .num{
+    font-size:44px;
+    font-weight:800;
+    line-height:1;
+  }
+  .score-badge .max{
+    font-size:14px;
+    color:var(--muted);
+  }
+  .tier-label{
+    display:inline-block;
+    font-size:14px;
+    font-weight:700;
+    padding:4px 14px;
+    border-radius:20px;
+    color:#fff;
+    margin-top:10px;
+  }
+  .tier-safe .tier-label{background:var(--green);}
+  .tier-caution .tier-label{background:var(--yellow);}
+  .tier-warning .tier-label{background:var(--orange);}
+  .tier-danger .tier-label{background:var(--red);}
+  .tier-safe .num{color:var(--green);}
+  .tier-caution .num{color:var(--yellow);}
+  .tier-warning .num{color:var(--orange);}
+  .tier-danger .num{color:var(--red);}
+
+  .advice{
+    font-size:14.5px;
+    line-height:1.9;
+    white-space:pre-wrap;
+    margin-bottom:18px;
+  }
+  .breakdown{
+    font-size:12.5px;
+    color:var(--muted);
+    background:#f7f7f8;
+    border-radius:10px;
+    padding:12px 14px;
+    margin-bottom:18px;
+  }
+  .breakdown div{margin-bottom:4px;}
+  .cta-box{
+    background:#fff7ec;
+    border:1px solid #f0dcb8;
+    border-radius:12px;
+    padding:16px;
+    margin-bottom:16px;
+  }
+  .cta-box p{
+    font-size:13.5px;
+    line-height:1.8;
+    margin:0 0 12px;
+  }
+  .cta-box a.note-btn{
+    display:block;
+    text-align:center;
+    background:#2b2b2b;
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+    font-size:14px;
+    padding:12px;
+    border-radius:8px;
+  }
+  .share-row{
+    display:flex;
+    gap:10px;
+  }
+  .share-row a, .share-row button{
+    flex:1;
+    text-align:center;
+    padding:11px;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:700;
+    text-decoration:none;
+    border:1px solid #ccc;
+    background:#fff;
+    color:#333;
+    cursor:pointer;
+  }
+  .share-row a.x-share{
+    background:#000;
+    color:#fff;
+    border:none;
+  }
+  #retryBtn{
+    display:block;
+    width:100%;
+    margin-top:10px;
+    background:none;
+    border:1px solid #999;
+    color:#555;
+    padding:10px;
+    border-radius:8px;
+    font-size:13px;
+    cursor:pointer;
+  }
+  footer{
+    text-align:center;
+    color:rgba(255,255,255,0.5);
+    font-size:11px;
+    margin-top:24px;
+    line-height:1.8;
+  }
+  .disclaimer{
+    font-size:11px;
+    color:var(--muted);
+    margin-top:14px;
+    line-height:1.6;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">FreeLABO / フリラボ</div>
+    <h1>収入不安定リスク診断</h1>
+    <p>9つの質問に答えるだけ。あなたの「収入が止まったときの耐性」を数値化します。<br>所要時間 約2分・登録不要。</p>
+  </header>
+
+  <div class="card" id="quizCard">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <form id="quizForm"></form>
+    <button id="submitBtn" type="button" disabled>診断結果を見る</button>
+    <div class="hint">全問回答すると結果が表示されます</div>
+  </div>
+
+  <div class="card" id="result">
+    <div class="score-badge" id="scoreBadge">
+      <div class="num" id="scoreNum">0</div>
+      <div class="max">/ 27点</div>
+      <div class="tier-label" id="tierLabel">判定中</div>
+    </div>
+    <div class="advice" id="adviceText"></div>
+    <div class="breakdown" id="breakdown"></div>
+    <div class="cta-box">
+      <p id="ctaText"></p>
+      <a href="https://note.com/" target="_blank" rel="noopener" class="note-btn" id="noteLink">有料note記事を見る（準備中）</a>
+    </div>
+    <div class="share-row">
+      <a href="#" id="xShare" class="x-share" target="_blank" rel="noopener">Xでシェア</a>
+      <button id="copyBtn" type="button">結果をコピー</button>
+    </div>
+    <button id="retryBtn" type="button">もう一度診断する</button>
+    <div class="disclaimer">
+      ※本診断は簡易的なセルフチェックであり、税務・法律・金融の専門的助言に代わるものではありません。結果は目安としてご活用ください。
+    </div>
+  </div>
+
+  <footer>
+    フリラボ ©2026 / 本診断は無料でご利用いただけます<br>
+    データはあなたの端末内でのみ処理され、サーバーに送信・保存されません。
+  </footer>
+</div>
+
+<script>
+/* =========================================================
+   フリラボ 収入不安定リスク診断 - 質問データ & スコアロジック
+   各設問: options[].score (0=低リスク 〜 3=高リスク)
+   合計スコア range: 0〜27点
+   ========================================================= */
+const QUESTIONS = [
+  {
+    id: "q1",
+    text: "Q1. 現在、収入を得ている取引先・クライアント・収入チャネルの数は？",
+    options: [
+      { label: "5件以上ある", score: 0 },
+      { label: "3〜4件ある", score: 1 },
+      { label: "2件ある", score: 2 },
+      { label: "1件のみ（またはそれに近い）", score: 3 }
+    ]
+  },
+  {
+    id: "q2",
+    text: "Q2. 最も売上の大きい取引先1社が、あなたの総収入に占める割合は？",
+    options: [
+      { label: "30%未満", score: 0 },
+      { label: "30〜50%程度", score: 1 },
+      { label: "50〜70%程度", score: 2 },
+      { label: "70%以上（ほぼ依存している）", score: 3 }
+    ]
+  },
+  {
+    id: "q3",
+    text: "Q3. 今すぐ収入がゼロになったとして、貯蓄だけで生活費を賄える期間は？",
+    options: [
+      { label: "6か月以上もつ", score: 0 },
+      { label: "3〜6か月もつ", score: 1 },
+      { label: "1〜3か月もつ", score: 2 },
+      { label: "1か月未満、または貯蓄がほぼない", score: 3 }
+    ]
+  },
+  {
+    id: "q4",
+    text: "Q4. 家賃・保険料・ローンなど「毎月必ず出ていく固定費」は、月収に対してどのくらいの割合ですか？",
+    options: [
+      { label: "3割未満", score: 0 },
+      { label: "3〜5割程度", score: 1 },
+      { label: "5〜7割程度", score: 2 },
+      { label: "7割以上、または正直把握していない", score: 3 }
+    ]
+  },
+  {
+    id: "q5",
+    text: "Q5. 過去半年で、新規の営業活動（提案・アプローチ・発信による集客など）を行った頻度は？",
+    options: [
+      { label: "月1回以上、継続的に行っている", score: 0 },
+      { label: "2〜3か月に1回程度", score: 1 },
+      { label: "半年で1〜2回程度", score: 2 },
+      { label: "ほとんど、または全く行っていない", score: 3 }
+    ]
+  },
+  {
+    id: "q6",
+    text: "Q6. 直近半年で、月収が一番多い月と少ない月の差（変動幅）はどのくらいですか？",
+    options: [
+      { label: "ほとんど差がない（±20%以内）", score: 0 },
+      { label: "やや変動する（±20〜50%程度）", score: 1 },
+      { label: "大きく変動する（±50〜100%程度）", score: 2 },
+      { label: "月によっては収入がゼロになる月もある", score: 3 }
+    ]
+  },
+  {
+    id: "q7",
+    text: "Q7. 事業用のお金と生活費（プライベートのお金）の管理状況は？",
+    options: [
+      { label: "口座を完全に分け、毎月収支を把握している", score: 0 },
+      { label: "一応分けているが、収支の把握はあいまい", score: 1 },
+      { label: "ほとんど分けていない", score: 2 },
+      { label: "分けておらず、今いくら使えるかも把握していない", score: 3 }
+    ]
+  },
+  {
+    id: "q8",
+    text: "Q8. 国民年金・国民健康保険・所得補償（就業不能）保険など、収入減に備えた制度への加入状況は？",
+    options: [
+      { label: "年金・保険に加え、共済等の備えもしっかりしている", score: 0 },
+      { label: "年金・健康保険は最低限加入している", score: 1 },
+      { label: "未納・未加入のものがある", score: 2 },
+      { label: "ほとんど何も備えていない、把握していない", score: 3 }
+    ]
+  },
+  {
+    id: "q9",
+    text: "Q9. 契約書・発注書・見積書などの書面を交わさずに仕事を始めてしまうことは？",
+    options: [
+      { label: "ほぼない（必ず書面やメールで条件を残す）", score: 0 },
+      { label: "たまにある", score: 1 },
+      { label: "半分くらいはそうなる", score: 2 },
+      { label: "口約束で始めることが多い", score: 3 }
+    ]
+  }
+];
+
+/* スコア→リスク判定（4段階） */
+function getTier(score){
+  if (score <= 6) {
+    return {
+      key: "safe",
+      label: "安定ゾーン",
+      advice:
+`現時点では、収入源の分散・貯蓄・備えの面で比較的しっかり土台ができています。
+
+ただし「今安定している」ことと「この先も安泰」であることは別物です。今の収入源のうち1つが仮になくなったら何が起きるか、一度シミュレーションしておくと安心です。`,
+      cta: "さらに土台を固めたい方へ。収入源をもう一段増やす『分散戦略』の具体策と、キャッシュフロー管理のコツをnote有料記事で解説しています。"
+    };
+  } else if (score <= 13) {
+    return {
+      key: "caution",
+      label: "注意ゾーン",
+      advice:
+`大きく崩れているわけではありませんが、いくつかの項目に「見過ごすと後で効いてくる」リスクの芽が見えています。
+
+すべてを一気に直す必要はありません。今回の回答の中で点数が高かった項目から1つずつ手を打てば、まだ十分に立て直せる段階です。`,
+      cta: "どこから手をつければいいか迷ったら。回答傾向別に優先順位をつけて改善するための実践チェックリストをnoteにまとめました。"
+    };
+  } else if (score <= 20) {
+    return {
+      key: "warning",
+      label: "警戒ゾーン",
+      advice:
+`収入源の偏り・貯蓄の少なさ・備えの薄さのいずれかで、「何か1つが崩れると生活が苦しくなる」状態に近づいています。
+
+深刻に捉えすぎる必要はありませんが、放置せず、具体的な行動に落とし込むべき時期に来ています。まずは影響の大きい項目から着手しましょう。`,
+      cta: "今日から着手できる立て直しステップを、実例とあわせてnoteに書きました。同じ状況から抜け出した具体的な手順を紹介しています。"
+    };
+  } else {
+    return {
+      key: "danger",
+      label: "要対策ゾーン",
+      advice:
+`収入源・貯蓄・備え・営業活動など、複数の面で「収入が途絶えたときの耐性」がかなり低い状態にあります。
+
+今は大きな問題が起きていなくても、取引先の契約終了や体調不良など、1つのきっかけで生活が一気に苦しくなるリスクがあります。焦る必要はありませんが、まずは1つでいいので、今日中に着手できる対策から始めることをおすすめします。`,
+      cta: "何から手をつければいいか迷う方のために、優先順位付きの具体的な行動プランをnote有料記事にまとめました。同じ状態から立て直した手順を解説しています。"
+    };
+  }
+}
+
+/* --- レンダリング --- */
+const form = document.getElementById("quizForm");
+const submitBtn = document.getElementById("submitBtn");
+const progressFill = document.getElementById("progressFill");
+
+QUESTIONS.forEach((q, qi) => {
+  const block = document.createElement("div");
+  block.className = "q-block";
+  block.innerHTML = `
+    <span class="q-num">Q${qi+1} / ${QUESTIONS.length}</span>
+    <p class="q-text">${q.text}</p>
+    <div class="options">
+      ${q.options.map((opt, oi) => `
+        <label data-q="${q.id}" data-oi="${oi}">
+          <input type="radio" name="${q.id}" value="${oi}">
+          <span>${opt.label}</span>
+        </label>
+      `).join("")}
+    </div>
+  `;
+  form.appendChild(block);
+});
+
+function updateProgress(){
+  const answered = QUESTIONS.filter(q => form.querySelector(`input[name="${q.id}"]:checked`)).length;
+  const pct = Math.round((answered / QUESTIONS.length) * 100);
+  progressFill.style.width = pct + "%";
+  submitBtn.disabled = answered < QUESTIONS.length;
+}
+
+form.addEventListener("change", (e) => {
+  if (e.target.type === "radio") {
+    // 選択状態のハイライト
+    const name = e.target.name;
+    form.querySelectorAll(`label[data-q="${name}"]`).forEach(l => l.classList.remove("selected"));
+    e.target.closest("label").classList.add("selected");
+    updateProgress();
+  }
+});
+
+let lastResult = null;
+
+submitBtn.addEventListener("click", () => {
+  let total = 0;
+  const detail = [];
+  QUESTIONS.forEach((q, qi) => {
+    const checked = form.querySelector(`input[name="${q.id}"]:checked`);
+    const oi = parseInt(checked.value, 10);
+    const opt = q.options[oi];
+    total += opt.score;
+    detail.push(`Q${qi+1}: ${opt.score}点`);
+  });
+
+  const tier = getTier(total);
+  lastResult = { total, tier, detail };
+
+  // 結果表示
+  document.getElementById("scoreNum").textContent = total;
+  document.getElementById("tierLabel").textContent = tier.label;
+  document.getElementById("adviceText").textContent = tier.advice;
+  document.getElementById("ctaText").textContent = tier.cta;
+  document.getElementById("breakdown").innerHTML =
+    "<div><strong>設問別スコア内訳</strong></div>" +
+    detail.map(d => `<div>${d}</div>`).join("");
+
+  const badge = document.getElementById("scoreBadge");
+  badge.className = "score-badge tier-" + tier.key;
+
+  const shareText = encodeURIComponent(
+    `【フリラボ】収入不安定リスク診断をやってみたら「${tier.label}」でした（${total}/27点）。あなたの結果は？`
+  );
+  const pageUrl = encodeURIComponent(location.href.split("#")[0]);
+  document.getElementById("xShare").href =
+    `https://twitter.com/intent/tweet?text=${shareText}&url=${pageUrl}`;
+
+  document.getElementById("quizCard").style.display = "none";
+  document.getElementById("result").style.display = "block";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+document.getElementById("copyBtn").addEventListener("click", () => {
+  if (!lastResult) return;
+  const text = `【フリラボ】収入不安定リスク診断結果\n判定: ${lastResult.tier.label}（${lastResult.total}/27点）\n${location.href.split("#")[0]}`;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById("copyBtn");
+    const original = btn.textContent;
+    btn.textContent = "コピーしました";
+    setTimeout(() => { btn.textContent = original; }, 1500);
+  });
+});
+
+document.getElementById("retryBtn").addEventListener("click", () => {
+  form.reset();
+  form.querySelectorAll("label.selected").forEach(l => l.classList.remove("selected"));
+  updateProgress();
+  document.getElementById("result").style.display = "none";
+  document.getElementById("quizCard").style.display = "block";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+updateProgress();
+</script>
+</body>
+</html>
