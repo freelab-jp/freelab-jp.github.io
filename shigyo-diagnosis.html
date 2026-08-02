@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>労務・税務リスク診断｜社労士事務所ライトハウス（サンプル）</title>
+<meta name="description" content="7つの質問に答えるだけ。あなたの会社の「労務・税務まわりのリスク」を数値でチェックします。所要時間 約2分・登録不要。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="労務・税務リスク診断｜社労士事務所ライトハウス（サンプル）">
+<meta property="og:description" content="7つの質問に答えるだけ。あなたの会社の「労務・税務まわりのリスク」を数値でチェックします。">
+
+<!-- ============================================================
+  Cloudflare Web Analytics（埋め込みパターン・プレースホルダー）
+  実際の納品時は、クライアントのサイトをCloudflareで登録して発行される
+  トークンを data-cf-beacon の "token" に設定し、下記コメントを解除する。
+  （無料プランのみで完結。営業時は「アクセス解析込み」の訴求材料になる）
+============================================================ -->
+<!--
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js'
+  data-cf-beacon='{"token": "ここにクライアント用のCloudflareトークンを入れる"}'></script>
+-->
+
+<style>
+  :root{
+    --bg1:#0e1a2b;
+    --bg2:#1b2d45;
+    --card:#ffffff;
+    --accent:#1f3a5f;
+    --accent2:#b08d3e;
+    --text:#1a1a1a;
+    --muted:#6b7280;
+    --green:#2e7d32;
+    --yellow:#b8860b;
+    --orange:#d9622b;
+    --red:#c62828;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",sans-serif;
+    background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);
+    color:var(--text);
+    min-height:100vh;
+    padding:24px 12px 60px;
+  }
+  .wrap{max-width:640px;margin:0 auto;}
+  .sample-badge{
+    text-align:center;color:#d9c48f;font-size:11px;letter-spacing:.08em;
+    margin-bottom:8px;opacity:.9;
+  }
+  header{text-align:center;color:#fff;margin-bottom:20px;}
+  header .logo{font-size:14px;letter-spacing:0.2em;opacity:0.7;margin-bottom:6px;}
+  header h1{font-size:24px;margin:0 0 8px;line-height:1.4;}
+  header p{font-size:13px;opacity:0.8;margin:0;line-height:1.6;}
+  .card{
+    background:var(--card);border-radius:16px;padding:24px 20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);margin-bottom:16px;
+  }
+  .progress-bar{width:100%;height:6px;background:#e5e7eb;border-radius:3px;overflow:hidden;margin-bottom:18px;}
+  .progress-fill{height:100%;background:var(--accent);width:0%;transition:width .3s ease;}
+  .q-block{margin-bottom:26px;padding-bottom:22px;border-bottom:1px solid #eee;}
+  .q-block:last-of-type{border-bottom:none;margin-bottom:8px;}
+  .q-num{display:inline-block;background:var(--accent);color:#fff;font-size:12px;padding:2px 8px;border-radius:10px;margin-bottom:8px;}
+  .q-text{font-size:15px;font-weight:700;line-height:1.6;margin:0 0 12px;}
+  .options label{
+    display:flex;align-items:flex-start;gap:8px;padding:10px 12px;border:1px solid #ddd;
+    border-radius:10px;margin-bottom:8px;cursor:pointer;font-size:14px;line-height:1.5;
+    transition:border-color .15s, background .15s;
+  }
+  .options label:hover{border-color:var(--accent);background:#f2f5fa;}
+  .options input{margin-top:3px;flex-shrink:0;}
+  .options label.selected{border-color:var(--accent);background:#e7ecf4;}
+  #submitBtn{
+    display:block;width:100%;padding:14px;font-size:16px;font-weight:700;color:#fff;
+    background:var(--accent2);border:none;border-radius:10px;cursor:pointer;margin-top:10px;
+  }
+  #submitBtn:disabled{background:#c9c9c9;cursor:not-allowed;}
+  #submitBtn:not(:disabled):hover{filter:brightness(1.05);}
+  .hint{font-size:12px;color:var(--muted);text-align:center;margin-top:8px;}
+  #result{display:none;}
+  .score-badge{text-align:center;padding:18px 10px 22px;}
+  .score-badge .num{font-size:44px;font-weight:800;line-height:1;}
+  .score-badge .max{font-size:14px;color:var(--muted);}
+  .tier-label{display:inline-block;font-size:14px;font-weight:700;padding:4px 14px;border-radius:20px;color:#fff;margin-top:10px;}
+  .tier-safe .tier-label{background:var(--green);}
+  .tier-caution .tier-label{background:var(--yellow);}
+  .tier-warning .tier-label{background:var(--orange);}
+  .tier-danger .tier-label{background:var(--red);}
+  .tier-safe .num{color:var(--green);}
+  .tier-caution .num{color:var(--yellow);}
+  .tier-warning .num{color:var(--orange);}
+  .tier-danger .num{color:var(--red);}
+  .advice{font-size:14.5px;line-height:1.9;white-space:pre-wrap;margin-bottom:18px;}
+  .breakdown{font-size:12.5px;color:var(--muted);background:#f7f7f8;border-radius:10px;padding:12px 14px;margin-bottom:18px;}
+  .breakdown div{margin-bottom:4px;}
+  .cta-box{background:#f6f1e4;border:1px solid #e2d3ab;border-radius:12px;padding:16px;margin-bottom:16px;}
+  .cta-box p{font-size:13.5px;line-height:1.8;margin:0 0 12px;}
+  .cta-box a.note-btn, .cta-box button.note-btn{
+    display:block;width:100%;text-align:center;background:var(--accent);color:#fff;text-decoration:none;
+    font-weight:700;font-size:14px;padding:12px;border-radius:8px;border:none;cursor:pointer;
+  }
+  .lead-form{margin-top:14px;padding-top:14px;border-top:1px dashed #d8c58f;}
+  .lead-form label{display:block;font-size:12.5px;color:#6b5a33;margin-bottom:4px;}
+  .lead-form input{
+    width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px;
+    margin-bottom:10px;font-family:inherit;
+  }
+  .lead-form .demo-note{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6;}
+  .share-row{display:flex;gap:10px;}
+  .share-row a, .share-row button{
+    flex:1;text-align:center;padding:11px;border-radius:8px;font-size:13px;font-weight:700;
+    text-decoration:none;border:1px solid #ccc;background:#fff;color:#333;cursor:pointer;
+  }
+  .share-row a.x-share{background:#000;color:#fff;border:none;}
+  #retryBtn{
+    display:block;width:100%;margin-top:10px;background:none;border:1px solid #999;color:#555;
+    padding:10px;border-radius:8px;font-size:13px;cursor:pointer;
+  }
+  footer{text-align:center;color:rgba(255,255,255,0.5);font-size:11px;margin-top:24px;line-height:1.8;}
+  .disclaimer{font-size:11px;color:var(--muted);margin-top:14px;line-height:1.6;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="sample-badge">診断ツールSaaS デモ ／ 士業（社労士・税理士）向けサンプル ※屋号・配色はご依頼に合わせてカスタマイズ可能</div>
+  <header>
+    <div class="logo" id="brandLogo"></div>
+    <h1 id="brandTitle"></h1>
+    <p id="brandSubtitle"></p>
+  </header>
+
+  <div class="card" id="quizCard">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <form id="quizForm"></form>
+    <button id="submitBtn" type="button" disabled>診断結果を見る</button>
+    <div class="hint">全問回答すると結果が表示されます</div>
+  </div>
+
+  <div class="card" id="result">
+    <div class="score-badge" id="scoreBadge">
+      <div class="num" id="scoreNum">0</div>
+      <div class="max" id="scoreMax"></div>
+      <div class="tier-label" id="tierLabel">判定中</div>
+    </div>
+    <div class="advice" id="adviceText"></div>
+    <div class="breakdown" id="breakdown"></div>
+    <div class="cta-box">
+      <p id="ctaText"></p>
+      <a href="#" target="_blank" rel="noopener" class="note-btn" id="ctaLink">無料相談を予約する</a>
+
+      <!-- ダミーのリード獲得フォーム（送信・保存は行わない見た目のみのUI） -->
+      <div class="lead-form" id="leadForm">
+        <label for="leadCompany">会社名・屋号</label>
+        <input type="text" id="leadCompany" placeholder="例）株式会社サンプル">
+        <label for="leadEmail">メールアドレス</label>
+        <input type="text" id="leadEmail" placeholder="例）example@mail.com">
+        <button type="button" class="note-btn" id="leadSubmitBtn">相談予約フォームを送信する</button>
+        <div class="demo-note">※本サンプルはデモのため送信・保存は行われません。実際の納品では相談予約フォーム・LINE登録等と連携し、リードを自動で受け取れるようにします。</div>
+      </div>
+    </div>
+    <div class="share-row">
+      <a href="#" id="xShare" class="x-share" target="_blank" rel="noopener">Xでシェア</a>
+      <button id="copyBtn" type="button">結果をコピー</button>
+    </div>
+    <button id="retryBtn" type="button">もう一度診断する</button>
+    <div class="disclaimer" id="disclaimerText"></div>
+  </div>
+
+  <footer id="footerText"></footer>
+</div>
+
+<script>
+/* =========================================================================
+   診断エンジン（フリラボ 診断ツールSaaS 共通テンプレートを流用）
+   このファイル固有の設定は下記 CONFIG のみ。エンジン部分は
+   _template/diagnosis-template.html と同一構造。
+   mode: "score" ＝ 各設問の点数を合計し、range指定のtiersで4段階判定
+   ========================================================================= */
+const CONFIG = {
+  brand: {
+    name: "社労士事務所ライトハウス",
+    logo: "社労士事務所ライトハウス（サンプル）",
+    title: "労務・税務リスク診断",
+    subtitle: "7つの質問に答えるだけ。あなたの会社の「労務・税務まわりのリスク」を数値でチェックします。所要時間 約2分・登録不要。",
+    footer: "社労士事務所ライトハウス ©2026 / 本診断は無料でご利用いただけます<br>データはあなたの端末内でのみ処理され、サーバーに送信・保存されません。<br>Powered by フリラボ診断ツール",
+    disclaimer: "※本診断は簡易的なセルフチェックであり、社会保険労務士・税理士等の専門家による個別診断・法的助言に代わるものではありません。結果は目安としてご活用ください。"
+  },
+  mode: "score",
+  questions: [
+    { id:"q1", text:"Q1. 就業規則の整備・更新状況は？", options:[
+      { label:"最新の法改正に合わせて定期的に見直し、届出も済んでいる", score:0 },
+      { label:"作成済みだが、数年間見直していない", score:1 },
+      { label:"作成はしているが、内容が古く形骸化している", score:2 },
+      { label:"そもそも就業規則がない、または内容を把握していない", score:3 }
+    ]},
+    { id:"q2", text:"Q2. 残業代・割増賃金の計算把握度は？", options:[
+      { label:"法定通りの割増率で毎月正確に計算・支給している", score:0 },
+      { label:"おおむね計算しているが、深夜割増や端数処理は曖昧", score:1 },
+      { label:"固定残業代（みなし残業）で運用しているが、超過分の精算は不確か", score:2 },
+      { label:"計算方法があいまい、またはサービス残業が発生している可能性がある", score:3 }
+    ]},
+    { id:"q3", text:"Q3. 社会保険・労働保険の加入もれの有無は？", options:[
+      { label:"対象者は全員加入済みで、漏れがないか定期確認している", score:0 },
+      { label:"基本的に加入しているが、適用拡大等の制度変更への対応が追いついていない", score:1 },
+      { label:"一部のパート・アルバイトの加入要否があいまいなまま運用している", score:2 },
+      { label:"加入要件を正確に把握しておらず、未加入者がいる可能性がある", score:3 }
+    ]},
+    { id:"q4", text:"Q4. 雇用契約書・業務委託契約書の整備状況は？", options:[
+      { label:"全員と書面（電子含む）で契約を交わし、内容も最新", score:0 },
+      { label:"契約書はあるが、雛形のまま長期間更新していない", score:1 },
+      { label:"一部の従業員・委託先とは口頭確認のみで契約書がない", score:2 },
+      { label:"契約書を交わす習慣がなく、条件は口頭・慣例で運用している", score:3 }
+    ]},
+    { id:"q5", text:"Q5. 労働時間管理の方法は？", options:[
+      { label:"勤怠システム等で客観的に記録し、上限規制も管理している", score:0 },
+      { label:"勤怠システムはあるが、残業時間の上限管理は担当者任せ", score:1 },
+      { label:"自己申告制のみで、実態との差異を確認する仕組みがない", score:2 },
+      { label:"労働時間の記録自体をほとんど取っていない", score:3 }
+    ]},
+    { id:"q6", text:"Q6. ハラスメント相談窓口・規定の有無は？", options:[
+      { label:"相談窓口・規程を整備し、周知・研修も行っている", score:0 },
+      { label:"規程はあるが、周知や相談実績の管理が不十分", score:1 },
+      { label:"窓口はあるが形だけで、実質機能していない", score:2 },
+      { label:"相談窓口も規程もない", score:3 }
+    ]},
+    { id:"q7", text:"Q7. 有給休暇の取得管理状況は？", options:[
+      { label:"年5日の取得義務を含め、個人ごとに管理・声かけしている", score:0 },
+      { label:"取得はさせているが、年5日義務の管理表までは整備していない", score:1 },
+      { label:"取得率が低い従業員がいることは把握しているが、対策できていない", score:2 },
+      { label:"有給休暇の取得状況をほとんど把握していない", score:3 }
+    ]}
+  ],
+  result: {
+    maxScore: 21,
+    tiers: [
+      { min:0, max:5, key:"safe", label:"良好ゾーン",
+        advice:"就業規則・契約書・労働時間管理など、労務まわりの基本的な体制はおおむね整っています。\n\nただし法改正（社会保険適用拡大、割増賃金率の見直し等）は毎年のように行われます。「整っている今」を維持するために、年1回程度の定期チェックをおすすめします。",
+        cta:"現状維持で十分な水準ですが、法改正への対応漏れがないか、無料相談で一度確認してみませんか。" },
+      { min:6, max:10, key:"caution", label:"軽度リスクゾーン",
+        advice:"大きな問題はまだ表面化していませんが、いくつかの項目に「見過ごすと後で是正勧告や未払い賃金請求につながりかねない」リスクの芽があります。\n\nすべてを一度に直す必要はありません。点数が高かった項目（契約書・労働時間管理など）から優先的に見直すことをおすすめします。",
+        cta:"どこから手をつけるべきか、優先順位を含めて無料相談でアドバイスします。" },
+      { min:11, max:15, key:"warning", label:"要注意ゾーン",
+        advice:"就業規則・残業代計算・契約書のいずれかで、労働基準監督署の是正勧告や従業員とのトラブルにつながりやすい状態が複数見られます。\n\n深刻に捉えすぎる必要はありませんが、影響の大きい項目（未払い賃金リスク・契約書不備）から早めに着手することをおすすめします。",
+        cta:"リスクの高い項目から順に整備するための具体的な進め方を、無料相談でご案内します。" },
+      { min:16, max:21, key:"danger", label:"要早急対応ゾーン",
+        advice:"労務・契約・社会保険まわりの複数の面で、行政指導・未払い賃金請求・従業員トラブルにつながるリスクが高い状態です。\n\n今は問題が顕在化していなくても、労基署の調査や退職者からの請求などをきっかけに一気に表面化するケースがあります。早めの専門家への相談をおすすめします。",
+        cta:"優先順位をつけた具体的な改善プランを、無料相談でご提案します。まずは現状のヒアリングからお気軽にどうぞ。" }
+    ]
+  },
+  cta: { linkText: "無料相談を予約する", linkHref: "#", leadFormEnabled: true }
+};
+
+/* ===================== エンジン本体（共通・原則書き換え不要） ===================== */
+(function(){
+  document.getElementById("brandLogo").textContent = CONFIG.brand.logo;
+  document.getElementById("brandTitle").textContent = CONFIG.brand.title;
+  document.getElementById("brandSubtitle").innerHTML = CONFIG.brand.subtitle;
+  document.getElementById("footerText").innerHTML = CONFIG.brand.footer;
+  document.getElementById("disclaimerText").textContent = CONFIG.brand.disclaimer;
+  document.getElementById("ctaLink").textContent = CONFIG.cta.linkText;
+  document.getElementById("ctaLink").href = CONFIG.cta.linkHref;
+  if (!CONFIG.cta.leadFormEnabled) document.getElementById("leadForm").style.display = "none";
+  document.getElementById("scoreMax").textContent = "/ " + CONFIG.result.maxScore + "点";
+
+  const form = document.getElementById("quizForm");
+  const submitBtn = document.getElementById("submitBtn");
+  const progressFill = document.getElementById("progressFill");
+  const QUESTIONS = CONFIG.questions;
+
+  QUESTIONS.forEach((q, qi) => {
+    const block = document.createElement("div");
+    block.className = "q-block";
+    block.innerHTML = `
+      <span class="q-num">Q${qi+1} / ${QUESTIONS.length}</span>
+      <p class="q-text">${q.text}</p>
+      <div class="options">
+        ${q.options.map((opt, oi) => `
+          <label data-q="${q.id}" data-oi="${oi}">
+            <input type="radio" name="${q.id}" value="${oi}">
+            <span>${opt.label}</span>
+          </label>
+        `).join("")}
+      </div>
+    `;
+    form.appendChild(block);
+  });
+
+  function updateProgress(){
+    const answered = QUESTIONS.filter(q => form.querySelector(`input[name="${q.id}"]:checked`)).length;
+    const pct = Math.round((answered / QUESTIONS.length) * 100);
+    progressFill.style.width = pct + "%";
+    submitBtn.disabled = answered < QUESTIONS.length;
+  }
+
+  form.addEventListener("change", (e) => {
+    if (e.target.type === "radio") {
+      const name = e.target.name;
+      form.querySelectorAll(`label[data-q="${name}"]`).forEach(l => l.classList.remove("selected"));
+      e.target.closest("label").classList.add("selected");
+      updateProgress();
+    }
+  });
+
+  let lastResult = null;
+
+  function computeScoreResult(){
+    let total = 0;
+    const detail = [];
+    QUESTIONS.forEach((q, qi) => {
+      const checked = form.querySelector(`input[name="${q.id}"]:checked`);
+      const oi = parseInt(checked.value, 10);
+      const opt = q.options[oi];
+      total += opt.score;
+      detail.push(`Q${qi+1}: ${opt.score}点`);
+    });
+    const tier = CONFIG.result.tiers.find(t => total >= t.min && total <= t.max)
+      || CONFIG.result.tiers[CONFIG.result.tiers.length - 1];
+    return { total, tier, detail };
+  }
+
+  submitBtn.addEventListener("click", () => {
+    const r = computeScoreResult();
+    lastResult = r;
+
+    document.getElementById("scoreNum").textContent = r.total;
+    document.getElementById("tierLabel").textContent = r.tier.label;
+    document.getElementById("adviceText").textContent = r.tier.advice;
+    document.getElementById("ctaText").textContent = r.tier.cta;
+    document.getElementById("breakdown").innerHTML =
+      "<div><strong>設問別スコア内訳</strong></div>" + r.detail.map(d => `<div>${d}</div>`).join("");
+
+    const badge = document.getElementById("scoreBadge");
+    badge.className = "score-badge tier-" + r.tier.key;
+
+    const shareText = encodeURIComponent(
+      `【${CONFIG.brand.name}】${CONFIG.brand.title}をやってみたら「${r.tier.label}」でした（${r.total}/${CONFIG.result.maxScore}点）。`
+    );
+    const pageUrl = encodeURIComponent(location.href.split("#")[0]);
+    document.getElementById("xShare").href = `https://twitter.com/intent/tweet?text=${shareText}&url=${pageUrl}`;
+
+    document.getElementById("quizCard").style.display = "none";
+    document.getElementById("result").style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  document.getElementById("copyBtn").addEventListener("click", () => {
+    if (!lastResult) return;
+    const text = `【${CONFIG.brand.name}】${CONFIG.brand.title} 結果\n判定: ${lastResult.tier.label}（${lastResult.total}/${CONFIG.result.maxScore}点）\n${location.href.split("#")[0]}`;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById("copyBtn");
+      const original = btn.textContent;
+      btn.textContent = "コピーしました";
+      setTimeout(() => { btn.textContent = original; }, 1500);
+    });
+  });
+
+  document.getElementById("leadSubmitBtn").addEventListener("click", () => {
+    // デモのため実際の送信は行わない（見た目のみ）
+    const btn = document.getElementById("leadSubmitBtn");
+    const original = btn.textContent;
+    btn.textContent = "送信しました（デモ）";
+    setTimeout(() => { btn.textContent = original; }, 2000);
+  });
+
+  document.getElementById("retryBtn").addEventListener("click", () => {
+    form.reset();
+    form.querySelectorAll("label.selected").forEach(l => l.classList.remove("selected"));
+    updateProgress();
+    document.getElementById("result").style.display = "none";
+    document.getElementById("quizCard").style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  updateProgress();
+})();
+</script>
+</body>
+</html>

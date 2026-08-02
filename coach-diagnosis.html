@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>学び直し・成長タイプ診断｜コーチングルーム コンパス（サンプル）</title>
+<meta name="description" content="6つの質問に答えるだけ。今のあなたに合った「次の一歩」のタイプが分かります。所要時間 約2分・登録不要。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="学び直し・成長タイプ診断｜コーチングルーム コンパス（サンプル）">
+<meta property="og:description" content="6つの質問に答えるだけ。今のあなたに合った「次の一歩」のタイプが分かります。">
+
+<!-- ============================================================
+  Cloudflare Web Analytics（埋め込みパターン・プレースホルダー）
+  実際の納品時は、クライアントのサイトをCloudflareで登録して発行される
+  トークンを data-cf-beacon の "token" に設定し、下記コメントを解除する。
+============================================================ -->
+<!--
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js'
+  data-cf-beacon='{"token": "ここにクライアント用のCloudflareトークンを入れる"}'></script>
+-->
+
+<style>
+  :root{
+    --bg1:#16262c;
+    --bg2:#28444a;
+    --card:#ffffff;
+    --accent:#5c7c99;
+    --accent2:#8fa98c;
+    --text:#1f2b2e;
+    --muted:#6b7280;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",sans-serif;
+    background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);
+    color:var(--text);
+    min-height:100vh;
+    padding:24px 12px 60px;
+  }
+  .wrap{max-width:640px;margin:0 auto;}
+  .sample-badge{
+    text-align:center;color:#d7e6d6;font-size:11px;letter-spacing:.08em;
+    margin-bottom:8px;opacity:.9;
+  }
+  header{text-align:center;color:#fff;margin-bottom:20px;}
+  header .logo{font-size:14px;letter-spacing:0.2em;opacity:0.75;margin-bottom:6px;}
+  header h1{font-size:24px;margin:0 0 8px;line-height:1.4;}
+  header p{font-size:13px;opacity:0.85;margin:0;line-height:1.6;}
+  .card{
+    background:var(--card);border-radius:16px;padding:24px 20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);margin-bottom:16px;
+  }
+  .progress-bar{width:100%;height:6px;background:#e5e7eb;border-radius:3px;overflow:hidden;margin-bottom:18px;}
+  .progress-fill{height:100%;background:var(--accent);width:0%;transition:width .3s ease;}
+  .q-block{margin-bottom:26px;padding-bottom:22px;border-bottom:1px solid #eee;}
+  .q-block:last-of-type{border-bottom:none;margin-bottom:8px;}
+  .q-num{display:inline-block;background:var(--accent);color:#fff;font-size:12px;padding:2px 8px;border-radius:10px;margin-bottom:8px;}
+  .q-text{font-size:15px;font-weight:700;line-height:1.6;margin:0 0 12px;}
+  .options label{
+    display:flex;align-items:flex-start;gap:8px;padding:10px 12px;border:1px solid #ddd;
+    border-radius:10px;margin-bottom:8px;cursor:pointer;font-size:14px;line-height:1.5;
+    transition:border-color .15s, background .15s;
+  }
+  .options label:hover{border-color:var(--accent);background:#f3f7f5;}
+  .options input{margin-top:3px;flex-shrink:0;}
+  .options label.selected{border-color:var(--accent);background:#e7eeec;}
+  #submitBtn{
+    display:block;width:100%;padding:14px;font-size:16px;font-weight:700;color:#fff;
+    background:var(--accent2);border:none;border-radius:10px;cursor:pointer;margin-top:10px;
+  }
+  #submitBtn:disabled{background:#c9c9c9;cursor:not-allowed;}
+  #submitBtn:not(:disabled):hover{filter:brightness(1.05);}
+  .hint{font-size:12px;color:var(--muted);text-align:center;margin-top:8px;}
+  #result{display:none;}
+  .type-badge{text-align:center;padding:12px 10px 18px;}
+  .type-emoji{font-size:52px;line-height:1;margin-bottom:8px;}
+  .type-name{font-size:22px;font-weight:800;}
+  .advice{font-size:14.5px;line-height:1.9;white-space:pre-wrap;margin-bottom:16px;}
+  .recommend-box{
+    font-size:13px;color:#4a5c52;background:#f1f6f2;border-radius:10px;
+    padding:14px 16px;margin-bottom:18px;line-height:1.8;
+  }
+  .recommend-box strong{display:block;margin-bottom:4px;color:var(--text);}
+  .cta-box{background:#f2f6f9;border:1px solid #d6e2e8;border-radius:12px;padding:16px;margin-bottom:16px;}
+  .cta-box p{font-size:13.5px;line-height:1.8;margin:0 0 12px;}
+  .cta-box a.note-btn, .cta-box button.note-btn{
+    display:block;width:100%;text-align:center;background:var(--accent);color:#fff;text-decoration:none;
+    font-weight:700;font-size:14px;padding:12px;border-radius:8px;border:none;cursor:pointer;
+  }
+  .lead-form{margin-top:14px;padding-top:14px;border-top:1px dashed #cddad3;}
+  .lead-form label{display:block;font-size:12.5px;color:#4f6055;margin-bottom:4px;}
+  .lead-form input{
+    width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px;
+    margin-bottom:10px;font-family:inherit;
+  }
+  .lead-form .demo-note{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6;}
+  .share-row{display:flex;gap:10px;}
+  .share-row a, .share-row button{
+    flex:1;text-align:center;padding:11px;border-radius:8px;font-size:13px;font-weight:700;
+    text-decoration:none;border:1px solid #ccc;background:#fff;color:#333;cursor:pointer;
+  }
+  .share-row a.x-share{background:#000;color:#fff;border:none;}
+  #retryBtn{
+    display:block;width:100%;margin-top:10px;background:none;border:1px solid #999;color:#555;
+    padding:10px;border-radius:8px;font-size:13px;cursor:pointer;
+  }
+  footer{text-align:center;color:rgba(255,255,255,0.6);font-size:11px;margin-top:24px;line-height:1.8;}
+  .disclaimer{font-size:11px;color:var(--muted);margin-top:14px;line-height:1.6;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="sample-badge">診断ツールSaaS デモ ／ コーチ・コンサル・講座運営者向けサンプル ※屋号・配色はご依頼に合わせてカスタマイズ可能</div>
+  <header>
+    <div class="logo" id="brandLogo"></div>
+    <h1 id="brandTitle"></h1>
+    <p id="brandSubtitle"></p>
+  </header>
+
+  <div class="card" id="quizCard">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <form id="quizForm"></form>
+    <button id="submitBtn" type="button" disabled>診断結果を見る</button>
+    <div class="hint">全問回答すると結果が表示されます</div>
+  </div>
+
+  <div class="card" id="result">
+    <div class="type-badge" id="typeBadge">
+      <div class="type-emoji" id="typeEmoji"></div>
+      <div class="type-name" id="typeName"></div>
+    </div>
+    <div class="advice" id="adviceText"></div>
+    <div class="recommend-box" id="recommendBox"></div>
+    <div class="cta-box">
+      <p id="ctaText"></p>
+      <a href="#" target="_blank" rel="noopener" class="note-btn" id="ctaLink">無料相談に申し込む</a>
+
+      <!-- ダミーのリード獲得フォーム（送信・保存は行わない見た目のみのUI） -->
+      <div class="lead-form" id="leadForm">
+        <label for="leadEmail">メールアドレス</label>
+        <input type="text" id="leadEmail" placeholder="例）example@mail.com">
+        <button type="button" class="note-btn" id="leadSubmitBtn">個別相談・メルマガの案内を受け取る</button>
+        <div class="demo-note">※本サンプルはデモのため送信・保存は行われません。実際の納品ではメルマガ配信・LINE登録・予約フォームと連携できます。</div>
+      </div>
+    </div>
+    <div class="share-row">
+      <a href="#" id="xShare" class="x-share" target="_blank" rel="noopener">Xでシェア</a>
+      <button id="copyBtn" type="button">結果をコピー</button>
+    </div>
+    <button id="retryBtn" type="button">もう一度診断する</button>
+    <div class="disclaimer" id="disclaimerText"></div>
+  </div>
+
+  <footer id="footerText"></footer>
+</div>
+
+<script>
+/* =========================================================================
+   診断エンジン（フリラボ 診断ツールSaaS 共通テンプレートを流用・typeモード版）
+   mode: "type" ＝ 各選択肢のvotesを集計し、最多得票のtypeで3〜4セグメント判定
+   ========================================================================= */
+const CONFIG = {
+  brand: {
+    name: "コーチングルーム コンパス",
+    logo: "コーチングルーム コンパス（サンプル）",
+    title: "学び直し・成長タイプ診断",
+    subtitle: "6つの質問に答えるだけ。今のあなたに合った「次の一歩」のタイプが分かります。所要時間 約2分・登録不要。",
+    footer: "コーチングルーム コンパス ©2026 / 本診断は無料でご利用いただけます<br>データはあなたの端末内でのみ処理され、サーバーに送信・保存されません。<br>Powered by フリラボ診断ツール",
+    disclaimer: "※本診断は簡易的な傾向診断であり、個別のコンサルティング・キャリア相談に代わるものではありません。結果は目安としてご活用ください。"
+  },
+  mode: "type",
+  questions: [
+    { id:"q1", text:"Q1. 今、一番つまずいていると感じる領域は？", options:[
+      { label:"商品・サービス設計（何をいくらで提供するか）", votes:{ kiban:2 } },
+      { label:"集客・新規のお客様獲得", votes:{ hasshin:2 } },
+      { label:"価格設定・値上げのタイミング", votes:{ kasoku:1, kiban:1 } },
+      { label:"時間管理・業務量が増えすぎている", votes:{ shikumika:2 } }
+    ]},
+    { id:"q2", text:"Q2. 現在の行動フェーズにいちばん近いのは？", options:[
+      { label:"まだ準備・構想段階で、本格始動前", votes:{ kiban:2 } },
+      { label:"始めてはいるが、思うように成果が出ていない", votes:{ kasoku:2 } },
+      { label:"ある程度成果は出ているが、一人でこなすのが限界", votes:{ shikumika:2 } },
+      { label:"成果は出ているが、認知・発信力がもっと欲しい", votes:{ hasshin:2 } }
+    ]},
+    { id:"q3", text:"Q3. 学び方の好みは？", options:[
+      { label:"まずは独学でじっくり整理したい", votes:{ kiban:1 } },
+      { label:"伴走型で背中を押してもらいたい", votes:{ kasoku:2 } },
+      { label:"同じ立場の人がいるコミュニティで学びたい", votes:{ hasshin:1 } },
+      { label:"仕組み化・効率化のノウハウを学びたい", votes:{ shikumika:2 } }
+    ]},
+    { id:"q4", text:"Q4. 使える時間・予算感にいちばん近いのは？", options:[
+      { label:"時間はあるが、予算はできるだけ絞りたい", votes:{ kiban:1 } },
+      { label:"時間は限られるが、投資してでも早く成果を出したい", votes:{ kasoku:2 } },
+      { label:"外注・自動化のためにある程度予算をかけられる", votes:{ shikumika:2 } },
+      { label:"発信・広告に使える時間や予算を増やしたい", votes:{ hasshin:2 } }
+    ]},
+    { id:"q5", text:"Q5. 目標達成までの一番の障壁は？", options:[
+      { label:"自分の商品・強みがまだ言語化できていない", votes:{ kiban:2 } },
+      { label:"行動量・提案数が足りていない", votes:{ kasoku:2 } },
+      { label:"自分がいないと回らない業務が多すぎる", votes:{ shikumika:2 } },
+      { label:"知られていない、認知が足りていない", votes:{ hasshin:2 } }
+    ]},
+    { id:"q6", text:"Q6. これまでの学習・挑戦のスタイルに近いのは？", options:[
+      { label:"新しいことに挑戦するのは得意だが、続かないことが多い", votes:{ kasoku:1, hasshin:1 } },
+      { label:"コツコツ積み上げるタイプ", votes:{ kiban:1, shikumika:1 } },
+      { label:"仕組みを作るのが好き（マニュアル化・自動化など）", votes:{ shikumika:2 } },
+      { label:"発信・アウトプットは得意な方", votes:{ hasshin:2 } }
+    ]}
+  ],
+  result: {
+    typeOrder: ["kiban","kasoku","shikumika","hasshin"],
+    types: {
+      kiban: {
+        label:"基盤づくりタイプ", emoji:"🌱", color:"#4f7a52",
+        advice:"商品・サービスの軸や強みの言語化が、次のステップへの一番のカギになっているタイプ。今は行動量よりも、土台を固めることが遠回りのようで一番の近道です。",
+        recommend:"商品設計・ポジショニング整理の個別相談／基礎講座",
+        cta:"まずは商品・強みの棚卸しから。個別相談で一緒に整理しませんか？"
+      },
+      kasoku: {
+        label:"加速タイプ", emoji:"🚀", color:"#c9822f",
+        advice:"土台はできていて、あとは行動量とスピードを上げるフェーズ。伴走してくれる存在がいると、一人で悩む時間を減らして成果に直結しやすくなります。",
+        recommend:"伴走型コンサル・コーチング／集中実践プログラム",
+        cta:"行動量を増やすための伴走サポートを行っています。まずは個別相談でどうぞ。"
+      },
+      shikumika: {
+        label:"仕組み化タイプ", emoji:"⚙️", color:"#5b7fa6",
+        advice:"案件はあるものの、自分の時間を切り売りする働き方から抜け出したいフェーズ。業務の仕組み化・外注化・自動化が次の成長のカギになります。",
+        recommend:"業務仕組み化・外注化の個別相談／効率化講座",
+        cta:"「自分がいなくても回る」仕組みづくりを一緒に設計しませんか？"
+      },
+      hasshin: {
+        label:"発信力強化タイプ", emoji:"📣", color:"#8a5fc9",
+        advice:"スキルや実績はあるのに、認知や発信が追いついていないタイプ。発信の型・継続の仕組みを整えることで、見込み客との接点を増やせます。",
+        recommend:"発信戦略・SNS運用の個別相談／コンテンツ設計講座",
+        cta:"発信の型を一緒に作りませんか？まずは個別相談でお話をお聞かせください。"
+      }
+    }
+  },
+  cta: { linkText: "無料相談に申し込む", linkHref: "#", leadFormEnabled: true }
+};
+
+/* ===================== エンジン本体（共通・原則書き換え不要） ===================== */
+(function(){
+  document.getElementById("brandLogo").textContent = CONFIG.brand.logo;
+  document.getElementById("brandTitle").textContent = CONFIG.brand.title;
+  document.getElementById("brandSubtitle").innerHTML = CONFIG.brand.subtitle;
+  document.getElementById("footerText").innerHTML = CONFIG.brand.footer;
+  document.getElementById("disclaimerText").textContent = CONFIG.brand.disclaimer;
+  document.getElementById("ctaLink").textContent = CONFIG.cta.linkText;
+  document.getElementById("ctaLink").href = CONFIG.cta.linkHref;
+  if (!CONFIG.cta.leadFormEnabled) document.getElementById("leadForm").style.display = "none";
+
+  const form = document.getElementById("quizForm");
+  const submitBtn = document.getElementById("submitBtn");
+  const progressFill = document.getElementById("progressFill");
+  const QUESTIONS = CONFIG.questions;
+
+  QUESTIONS.forEach((q, qi) => {
+    const block = document.createElement("div");
+    block.className = "q-block";
+    block.innerHTML = `
+      <span class="q-num">Q${qi+1} / ${QUESTIONS.length}</span>
+      <p class="q-text">${q.text}</p>
+      <div class="options">
+        ${q.options.map((opt, oi) => `
+          <label data-q="${q.id}" data-oi="${oi}">
+            <input type="radio" name="${q.id}" value="${oi}">
+            <span>${opt.label}</span>
+          </label>
+        `).join("")}
+      </div>
+    `;
+    form.appendChild(block);
+  });
+
+  function updateProgress(){
+    const answered = QUESTIONS.filter(q => form.querySelector(`input[name="${q.id}"]:checked`)).length;
+    const pct = Math.round((answered / QUESTIONS.length) * 100);
+    progressFill.style.width = pct + "%";
+    submitBtn.disabled = answered < QUESTIONS.length;
+  }
+
+  form.addEventListener("change", (e) => {
+    if (e.target.type === "radio") {
+      const name = e.target.name;
+      form.querySelectorAll(`label[data-q="${name}"]`).forEach(l => l.classList.remove("selected"));
+      e.target.closest("label").classList.add("selected");
+      updateProgress();
+    }
+  });
+
+  let lastResult = null;
+
+  function computeTypeResult(){
+    const order = CONFIG.result.typeOrder;
+    const totals = {};
+    order.forEach(k => totals[k] = 0);
+    QUESTIONS.forEach((q, qi) => {
+      const checked = form.querySelector(`input[name="${q.id}"]:checked`);
+      const oi = parseInt(checked.value, 10);
+      const opt = q.options[oi];
+      const votes = opt.votes || {};
+      Object.entries(votes).forEach(([k, v]) => { totals[k] = (totals[k] || 0) + v; });
+    });
+    let bestKey = order[0], bestScore = -Infinity;
+    order.forEach(k => { if ((totals[k] || 0) > bestScore) { bestScore = totals[k]; bestKey = k; } });
+    return { typeKey: bestKey, type: CONFIG.result.types[bestKey], totals };
+  }
+
+  submitBtn.addEventListener("click", () => {
+    const r = computeTypeResult();
+    lastResult = r;
+
+    document.getElementById("typeEmoji").textContent = r.type.emoji;
+    document.getElementById("typeName").textContent = r.type.label;
+    document.getElementById("typeName").style.color = r.type.color;
+    document.getElementById("adviceText").textContent = r.type.advice;
+    document.getElementById("recommendBox").innerHTML =
+      "<strong>おすすめの相談・講座メニュー</strong>" + r.type.recommend;
+    document.getElementById("ctaText").textContent = r.type.cta;
+
+    const shareText = encodeURIComponent(
+      `【${CONFIG.brand.name}】${CONFIG.brand.title}をやってみたら「${r.type.label}」でした！あなたのタイプは？`
+    );
+    const pageUrl = encodeURIComponent(location.href.split("#")[0]);
+    document.getElementById("xShare").href = `https://twitter.com/intent/tweet?text=${shareText}&url=${pageUrl}`;
+
+    document.getElementById("quizCard").style.display = "none";
+    document.getElementById("result").style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  document.getElementById("copyBtn").addEventListener("click", () => {
+    if (!lastResult) return;
+    const text = `【${CONFIG.brand.name}】${CONFIG.brand.title} 結果\n診断タイプ: ${lastResult.type.label}\n${location.href.split("#")[0]}`;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById("copyBtn");
+      const original = btn.textContent;
+      btn.textContent = "コピーしました";
+      setTimeout(() => { btn.textContent = original; }, 1500);
+    });
+  });
+
+  document.getElementById("leadSubmitBtn").addEventListener("click", () => {
+    // デモのため実際の送信は行わない（見た目のみ）
+    const btn = document.getElementById("leadSubmitBtn");
+    const original = btn.textContent;
+    btn.textContent = "受け付けました（デモ）";
+    setTimeout(() => { btn.textContent = original; }, 2000);
+  });
+
+  document.getElementById("retryBtn").addEventListener("click", () => {
+    form.reset();
+    form.querySelectorAll("label.selected").forEach(l => l.classList.remove("selected"));
+    updateProgress();
+    document.getElementById("result").style.display = "none";
+    document.getElementById("quizCard").style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  updateProgress();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>肌質・髪質タイプ診断｜美容室ルミエール（サンプル）</title>
+<meta name="description" content="5つの質問に答えるだけ。あなたの髪・肌に合ったケアタイプが分かります。所要時間 約1分・登録不要。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="肌質・髪質タイプ診断｜美容室ルミエール（サンプル）">
+<meta property="og:description" content="5つの質問に答えるだけ。あなたにぴったりのケアタイプが分かります。">
+
+<!-- ============================================================
+  Cloudflare Web Analytics（埋め込みパターン・プレースホルダー）
+  実際の納品時は、クライアントのサイトをCloudflareで登録して発行される
+  トークンを data-cf-beacon の "token" に設定し、下記コメントを解除する。
+============================================================ -->
+<!--
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js'
+  data-cf-beacon='{"token": "ここにクライアント用のCloudflareトークンを入れる"}'></script>
+-->
+
+<style>
+  :root{
+    --bg1:#2e1f2b;
+    --bg2:#4a2f45;
+    --card:#fffaf7;
+    --accent:#d68fb0;
+    --accent2:#e0a458;
+    --text:#3a2a33;
+    --muted:#8a7580;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",sans-serif;
+    background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);
+    color:var(--text);
+    min-height:100vh;
+    padding:24px 12px 60px;
+  }
+  .wrap{max-width:640px;margin:0 auto;}
+  .sample-badge{
+    text-align:center;color:#f3d9e6;font-size:11px;letter-spacing:.08em;
+    margin-bottom:8px;opacity:.9;
+  }
+  header{text-align:center;color:#fff;margin-bottom:20px;}
+  header .logo{font-size:14px;letter-spacing:0.2em;opacity:0.8;margin-bottom:6px;}
+  header h1{font-size:24px;margin:0 0 8px;line-height:1.4;}
+  header p{font-size:13px;opacity:0.85;margin:0;line-height:1.6;}
+  .card{
+    background:var(--card);border-radius:20px;padding:24px 20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);margin-bottom:16px;
+  }
+  .progress-bar{width:100%;height:6px;background:#f1e3ea;border-radius:3px;overflow:hidden;margin-bottom:18px;}
+  .progress-fill{height:100%;background:var(--accent);width:0%;transition:width .3s ease;}
+  .q-block{margin-bottom:26px;padding-bottom:22px;border-bottom:1px solid #f0e4ea;}
+  .q-block:last-of-type{border-bottom:none;margin-bottom:8px;}
+  .q-num{display:inline-block;background:var(--accent);color:#fff;font-size:12px;padding:2px 8px;border-radius:10px;margin-bottom:8px;}
+  .q-text{font-size:15px;font-weight:700;line-height:1.6;margin:0 0 12px;}
+  .options label{
+    display:flex;align-items:flex-start;gap:8px;padding:10px 12px;border:1px solid #eddce6;
+    border-radius:12px;margin-bottom:8px;cursor:pointer;font-size:14px;line-height:1.5;
+    transition:border-color .15s, background .15s;
+  }
+  .options label:hover{border-color:var(--accent);background:#fdf3f8;}
+  .options input{margin-top:3px;flex-shrink:0;}
+  .options label.selected{border-color:var(--accent);background:#fbe9f1;}
+  #submitBtn{
+    display:block;width:100%;padding:14px;font-size:16px;font-weight:700;color:#fff;
+    background:var(--accent2);border:none;border-radius:14px;cursor:pointer;margin-top:10px;
+  }
+  #submitBtn:disabled{background:#d9cfd4;cursor:not-allowed;}
+  #submitBtn:not(:disabled):hover{filter:brightness(1.05);}
+  .hint{font-size:12px;color:var(--muted);text-align:center;margin-top:8px;}
+  #result{display:none;}
+  .type-badge{text-align:center;padding:12px 10px 18px;}
+  .type-emoji{font-size:52px;line-height:1;margin-bottom:8px;}
+  .type-name{font-size:22px;font-weight:800;}
+  .advice{font-size:14.5px;line-height:1.9;white-space:pre-wrap;margin-bottom:16px;}
+  .recommend-box{
+    font-size:13px;color:#6b4f5e;background:#faf0f5;border-radius:12px;
+    padding:14px 16px;margin-bottom:18px;line-height:1.8;
+  }
+  .recommend-box strong{display:block;margin-bottom:4px;color:var(--text);}
+  .cta-box{background:#fff3e4;border:1px solid #f0d3ab;border-radius:14px;padding:16px;margin-bottom:16px;}
+  .cta-box p{font-size:13.5px;line-height:1.8;margin:0 0 12px;}
+  .cta-box a.note-btn, .cta-box button.note-btn{
+    display:block;width:100%;text-align:center;background:#c9598f;color:#fff;text-decoration:none;
+    font-weight:700;font-size:14px;padding:12px;border-radius:10px;border:none;cursor:pointer;
+  }
+  .lead-form{margin-top:14px;padding-top:14px;border-top:1px dashed #eccf9e;}
+  .lead-form label{display:block;font-size:12.5px;color:#7a5a3d;margin-bottom:4px;}
+  .lead-form input{
+    width:100%;padding:10px 12px;border:1px solid #eaddc9;border-radius:10px;font-size:14px;
+    margin-bottom:10px;font-family:inherit;
+  }
+  .lead-form .demo-note{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6;}
+  .share-row{display:flex;gap:10px;}
+  .share-row a, .share-row button{
+    flex:1;text-align:center;padding:11px;border-radius:10px;font-size:13px;font-weight:700;
+    text-decoration:none;border:1px solid #e0cdd8;background:#fff;color:#5a4550;cursor:pointer;
+  }
+  .share-row a.x-share{background:#000;color:#fff;border:none;}
+  #retryBtn{
+    display:block;width:100%;margin-top:10px;background:none;border:1px solid #d3b8c4;color:#7a5a68;
+    padding:10px;border-radius:10px;font-size:13px;cursor:pointer;
+  }
+  footer{text-align:center;color:rgba(255,255,255,0.6);font-size:11px;margin-top:24px;line-height:1.8;}
+  .disclaimer{font-size:11px;color:var(--muted);margin-top:14px;line-height:1.6;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="sample-badge">診断ツールSaaS デモ ／ 美容室・サロン向けサンプル ※屋号・配色はご依頼に合わせてカスタマイズ可能</div>
+  <header>
+    <div class="logo" id="brandLogo"></div>
+    <h1 id="brandTitle"></h1>
+    <p id="brandSubtitle"></p>
+  </header>
+
+  <div class="card" id="quizCard">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <form id="quizForm"></form>
+    <button id="submitBtn" type="button" disabled>診断結果を見る</button>
+    <div class="hint">全問回答すると結果が表示されます</div>
+  </div>
+
+  <div class="card" id="result">
+    <div class="type-badge" id="typeBadge">
+      <div class="type-emoji" id="typeEmoji"></div>
+      <div class="type-name" id="typeName"></div>
+    </div>
+    <div class="advice" id="adviceText"></div>
+    <div class="recommend-box" id="recommendBox"></div>
+    <div class="cta-box">
+      <p id="ctaText"></p>
+      <a href="#" target="_blank" rel="noopener" class="note-btn" id="ctaLink">LINEで予約・相談する</a>
+
+      <!-- ダミーのリード獲得フォーム（送信・保存は行わない見た目のみのUI） -->
+      <div class="lead-form" id="leadForm">
+        <label for="leadEmail">LINE ID または メールアドレス</label>
+        <input type="text" id="leadEmail" placeholder="例）@sample_line または example@mail.com">
+        <button type="button" class="note-btn" id="leadSubmitBtn">診断結果を保存して予約する</button>
+        <div class="demo-note">※本サンプルはデモのため送信・保存は行われません。実際の納品ではLINE公式アカウント登録・予約フォームと連携できます。</div>
+      </div>
+    </div>
+    <div class="share-row">
+      <a href="#" id="xShare" class="x-share" target="_blank" rel="noopener">Xでシェア</a>
+      <button id="copyBtn" type="button">結果をコピー</button>
+    </div>
+    <button id="retryBtn" type="button">もう一度診断する</button>
+    <div class="disclaimer" id="disclaimerText"></div>
+  </div>
+
+  <footer id="footerText"></footer>
+</div>
+
+<script>
+/* =========================================================================
+   診断エンジン（フリラボ 診断ツールSaaS 共通テンプレートを流用・typeモード版）
+   mode: "type" ＝ 各選択肢のvotesを集計し、最多得票のtypeで4〜5タイプ判定
+   （点数の合計ではなく、回答の組み合わせでタイプが決まる）
+   ========================================================================= */
+const CONFIG = {
+  brand: {
+    name: "美容室ルミエール",
+    logo: "美容室ルミエール（サンプル）",
+    title: "肌質・髪質タイプ診断",
+    subtitle: "5つの質問に答えるだけ。あなたの髪・肌に合ったケアタイプが分かります。所要時間 約1分・登録不要。",
+    footer: "美容室ルミエール ©2026 / 本診断は無料でご利用いただけます<br>データはあなたの端末内でのみ処理され、サーバーに送信・保存されません。<br>Powered by フリラボ診断ツール",
+    disclaimer: "※本診断は簡易的な傾向診断であり、医療的な肌質・髪質判定に代わるものではありません。結果は目安としてご活用ください。"
+  },
+  mode: "type",
+  questions: [
+    { id:"q1", text:"Q1. 髪・肌の悩みで一番気になるのは？", options:[
+      { label:"パサつき・乾燥が気になる", votes:{ kansou:2 } },
+      { label:"枝毛・切れ毛などのダメージが気になる", votes:{ damage:2 } },
+      { label:"特に大きな悩みはないが、もっとツヤを出したい", votes:{ uru:2 } },
+      { label:"朝のスタイリングがうまく決まらない", votes:{ jitan:2 } }
+    ]},
+    { id:"q2", text:"Q2. 朝のお手入れ・スタイリングにかける時間は？", options:[
+      { label:"5分以内で済ませたい（とにかく時短優先）", votes:{ jitan:2 } },
+      { label:"10〜15分程度、標準的にケアしている", votes:{ uru:1, damage:1 } },
+      { label:"20分以上、念入りにケアしている", votes:{ kansou:1, damage:1 } },
+      { label:"気分によってかなり変わる", votes:{ imechen:1 } }
+    ]},
+    { id:"q3", text:"Q3. 季節による髪・肌の変化の感じ方は？", options:[
+      { label:"乾燥する季節は特につらい", votes:{ kansou:2 } },
+      { label:"汗や紫外線でダメージを感じやすい", votes:{ damage:2 } },
+      { label:"季節はあまり関係なく、常に安定させたい", votes:{ uru:2 } },
+      { label:"季節の変わり目にイメージも変えたくなる", votes:{ imechen:2 } }
+    ]},
+    { id:"q4", text:"Q4. これまで試してきたケアの傾向は？", options:[
+      { label:"保湿・うるおい系のケアを重視してきた", votes:{ kansou:2, uru:1 } },
+      { label:"トリートメント・補修系のケアを重視してきた", votes:{ damage:2 } },
+      { label:"特に何もしてこなかった、時短重視だった", votes:{ jitan:2 } },
+      { label:"いろいろ試すのが好き（新しいものにすぐ挑戦）", votes:{ imechen:2 } }
+    ]},
+    { id:"q5", text:"Q5. なりたいイメージ・理想は？", options:[
+      { label:"とにかく艶々でまとまりのある髪・肌にしたい", votes:{ uru:2 } },
+      { label:"傷んだ部分をしっかり集中的に直したい", votes:{ damage:2 } },
+      { label:"手間をかけずにキレイをキープしたい", votes:{ jitan:2 } },
+      { label:"思い切ってイメージを変えたい", votes:{ imechen:2 } }
+    ]}
+  ],
+  result: {
+    typeOrder: ["uru","kansou","damage","jitan","imechen"],
+    types: {
+      uru: {
+        label:"うるツヤ美髪タイプ", emoji:"✨", color:"#c9598f",
+        advice:"地肌もダメージも大きな悩みはないけれど、もっと「艶」と「まとまり」が欲しいタイプ。ベースが整っているからこそ、仕上げのツヤ出しケアで一気に印象が変わります。",
+        recommend:"艶出しトリートメント／ヘッドスパ／ツヤ出しオイルパック",
+        cta:"サロンでのツヤ出しトリートメントを体験してみませんか？初回限定メニューのご案内はLINEで受け取れます。"
+      },
+      kansou: {
+        label:"乾燥ケア優先タイプ", emoji:"💧", color:"#5b8ec9",
+        advice:"パサつきや乾燥が気になりやすく、季節の変わり目にコンディションが揺らぎやすいタイプ。保湿を軸にしたケアの積み重ねが効果を発揮します。",
+        recommend:"保湿トリートメント／うるおいヘッドスパ／おうちケア用アイテムのご提案",
+        cta:"乾燥に負けない髪・肌づくりを、保湿ケア専門メニューでサポートします。詳しくはLINEでご相談ください。"
+      },
+      damage: {
+        label:"ダメージ集中ケアタイプ", emoji:"🌿", color:"#5a8f52",
+        advice:"枝毛・切れ毛や、カラー・パーマの蓄積ダメージが気になるタイプ。集中的な補修ケアで、土台からコンディションを立て直しましょう。",
+        recommend:"集中補修トリートメント／ダメージ毛カウンセリング／ホームケアのご提案",
+        cta:"ダメージの根本原因を一緒に見直しませんか？集中ケアコースのご案内はLINEから。"
+      },
+      jitan: {
+        label:"スタイリング時短タイプ", emoji:"⏱", color:"#d9922f",
+        advice:"忙しい毎日の中で、お手入れやスタイリングにかける時間を減らしたいタイプ。再現性の高いスタイル・お手入れが楽になるメニューが向いています。",
+        recommend:"くせ毛・広がり軽減の縮毛矯正／扱いやすいショートスタイル提案／時短スタイリング講座",
+        cta:"毎朝のスタイリングをラクにする施術メニューをご提案します。まずはLINEでご相談ください。"
+      },
+      imechen: {
+        label:"イメチェン挑戦タイプ", emoji:"🌈", color:"#8a5fc9",
+        advice:"気分や季節の変わり目にイメージを変えたくなるタイプ。新しいスタイルへの挑戦を、プロのカウンセリングと一緒に楽しみましょう。",
+        recommend:"カラーチェンジ相談／ヘアスタイルカウンセリング／季節ごとの新作メニューご案内",
+        cta:"新しい自分に出会うきっかけを。イメージチェンジ相談はLINEから気軽にどうぞ。"
+      }
+    }
+  },
+  cta: { linkText: "LINEで予約・相談する", linkHref: "#", leadFormEnabled: true }
+};
+
+/* ===================== エンジン本体（共通・原則書き換え不要） ===================== */
+(function(){
+  document.getElementById("brandLogo").textContent = CONFIG.brand.logo;
+  document.getElementById("brandTitle").textContent = CONFIG.brand.title;
+  document.getElementById("brandSubtitle").innerHTML = CONFIG.brand.subtitle;
+  document.getElementById("footerText").innerHTML = CONFIG.brand.footer;
+  document.getElementById("disclaimerText").textContent = CONFIG.brand.disclaimer;
+  document.getElementById("ctaLink").textContent = CONFIG.cta.linkText;
+  document.getElementById("ctaLink").href = CONFIG.cta.linkHref;
+  if (!CONFIG.cta.leadFormEnabled) document.getElementById("leadForm").style.display = "none";
+
+  const form = document.getElementById("quizForm");
+  const submitBtn = document.getElementById("submitBtn");
+  const progressFill = document.getElementById("progressFill");
+  const QUESTIONS = CONFIG.questions;
+
+  QUESTIONS.forEach((q, qi) => {
+    const block = document.createElement("div");
+    block.className = "q-block";
+    block.innerHTML = `
+      <span class="q-num">Q${qi+1} / ${QUESTIONS.length}</span>
+      <p class="q-text">${q.text}</p>
+      <div class="options">
+        ${q.options.map((opt, oi) => `
+          <label data-q="${q.id}" data-oi="${oi}">
+            <input type="radio" name="${q.id}" value="${oi}">
+            <span>${opt.label}</span>
+          </label>
+        `).join("")}
+      </div>
+    `;
+    form.appendChild(block);
+  });
+
+  function updateProgress(){
+    const answered = QUESTIONS.filter(q => form.querySelector(`input[name="${q.id}"]:checked`)).length;
+    const pct = Math.round((answered / QUESTIONS.length) * 100);
+    progressFill.style.width = pct + "%";
+    submitBtn.disabled = answered < QUESTIONS.length;
+  }
+
+  form.addEventListener("change", (e) => {
+    if (e.target.type === "radio") {
+      const name = e.target.name;
+      form.querySelectorAll(`label[data-q="${name}"]`).forEach(l => l.classList.remove("selected"));
+      e.target.closest("label").classList.add("selected");
+      updateProgress();
+    }
+  });
+
+  let lastResult = null;
+
+  function computeTypeResult(){
+    const order = CONFIG.result.typeOrder;
+    const totals = {};
+    order.forEach(k => totals[k] = 0);
+    QUESTIONS.forEach((q, qi) => {
+      const checked = form.querySelector(`input[name="${q.id}"]:checked`);
+      const oi = parseInt(checked.value, 10);
+      const opt = q.options[oi];
+      const votes = opt.votes || {};
+      Object.entries(votes).forEach(([k, v]) => { totals[k] = (totals[k] || 0) + v; });
+    });
+    let bestKey = order[0], bestScore = -Infinity;
+    order.forEach(k => { if ((totals[k] || 0) > bestScore) { bestScore = totals[k]; bestKey = k; } });
+    return { typeKey: bestKey, type: CONFIG.result.types[bestKey], totals };
+  }
+
+  submitBtn.addEventListener("click", () => {
+    const r = computeTypeResult();
+    lastResult = r;
+
+    document.getElementById("typeEmoji").textContent = r.type.emoji;
+    document.getElementById("typeName").textContent = r.type.label;
+    document.getElementById("typeName").style.color = r.type.color;
+    document.getElementById("adviceText").textContent = r.type.advice;
+    document.getElementById("recommendBox").innerHTML =
+      "<strong>おすすめメニュー</strong>" + r.type.recommend;
+    document.getElementById("ctaText").textContent = r.type.cta;
+
+    const shareText = encodeURIComponent(
+      `【${CONFIG.brand.name}】${CONFIG.brand.title}をやってみたら「${r.type.label}」でした！あなたのタイプは？`
+    );
+    const pageUrl = encodeURIComponent(location.href.split("#")[0]);
+    document.getElementById("xShare").href = `https://twitter.com/intent/tweet?text=${shareText}&url=${pageUrl}`;
+
+    document.getElementById("quizCard").style.display = "none";
+    document.getElementById("result").style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  document.getElementById("copyBtn").addEventListener("click", () => {
+    if (!lastResult) return;
+    const text = `【${CONFIG.brand.name}】${CONFIG.brand.title} 結果\n診断タイプ: ${lastResult.type.label}\n${location.href.split("#")[0]}`;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById("copyBtn");
+      const original = btn.textContent;
+      btn.textContent = "コピーしました";
+      setTimeout(() => { btn.textContent = original; }, 1500);
+    });
+  });
+
+  document.getElementById("leadSubmitBtn").addEventListener("click", () => {
+    // デモのため実際の送信は行わない（見た目のみ）
+    const btn = document.getElementById("leadSubmitBtn");
+    const original = btn.textContent;
+    btn.textContent = "受け付けました（デモ）";
+    setTimeout(() => { btn.textContent = original; }, 2000);
+  });
+
+  document.getElementById("retryBtn").addEventListener("click", () => {
+    form.reset();
+    form.querySelectorAll("label.selected").forEach(l => l.classList.remove("selected"));
+    updateProgress();
+    document.getElementById("result").style.display = "none";
+    document.getElementById("quizCard").style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  updateProgress();
+})();
+</script>
+</body>
+</html>
