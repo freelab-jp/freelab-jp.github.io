@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>フリラボ | 御社専用の診断アプリで、見込み客が自分から動く導線を作ります</title>
+<meta name="description" content="士業・美容室・コーチ/コンサル向け。御社専用の診断コンテンツを月額13,000円〜で制作。実物サンプル3つを今すぐ体験できます。">
+<style>
+  :root{
+    --bg:#0f1115;
+    --card:#ffffff;
+    --accent:#2b6cb0;
+    --accent2:#e07a3f;
+    --text:#1a1a1a;
+    --muted:#6b7280;
+    --green:#2e7d32;
+    --yellow:#b8860b;
+    --orange:#d9622b;
+    --red:#c62828;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.75;
+  }
+  a{ color:inherit; }
+  .wrap{ max-width:880px; margin:0 auto; padding:0 20px; }
+
+  header.top{
+    padding:56px 20px 40px;
+    text-align:center;
+    color:#fff;
+  }
+  header.top .eyebrow{
+    font-size:13px;
+    letter-spacing:.05em;
+    color:#9fb4cc;
+    margin-bottom:14px;
+  }
+  header.top h1{
+    font-size:30px;
+    line-height:1.5;
+    margin:0 0 18px;
+  }
+  header.top h1 .hi{
+    color:var(--accent2);
+  }
+  header.top p.lead{
+    font-size:15px;
+    color:#c9d3de;
+    max-width:640px;
+    margin:0 auto 30px;
+  }
+
+  .cta-btn{
+    display:inline-block;
+    background:var(--accent2);
+    color:#fff;
+    font-weight:bold;
+    font-size:16px;
+    padding:16px 36px;
+    border-radius:8px;
+    text-decoration:none;
+    box-shadow:0 6px 18px rgba(224,122,63,.35);
+  }
+  .cta-sub{
+    margin-top:12px;
+    font-size:12px;
+    color:#93a2b3;
+  }
+
+  section{ padding:52px 0; }
+  section.card-section{ background:#fff; }
+  h2.section-title{
+    font-size:22px;
+    text-align:center;
+    margin:0 0 8px;
+  }
+  p.section-sub{
+    text-align:center;
+    color:var(--muted);
+    font-size:14px;
+    margin:0 0 36px;
+  }
+
+  .pain-list{
+    list-style:none;
+    padding:0;
+    margin:0 0 28px;
+  }
+  .pain-list li{
+    background:#f7f8fa;
+    border-radius:8px;
+    padding:16px 20px;
+    margin-bottom:10px;
+    font-size:15px;
+  }
+  .pain-list li::before{ content:"・"; color:var(--accent2); font-weight:bold; }
+
+  .lead-in{
+    background:#eef4fb;
+    border-left:4px solid var(--accent);
+    padding:18px 22px;
+    border-radius:6px;
+    font-size:14.5px;
+  }
+
+  .feature-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+  .feature-grid .item{
+    background:#f7f8fa;
+    border-radius:8px;
+    padding:16px 18px;
+    font-size:14px;
+  }
+  .feature-grid .item b{ display:block; margin-bottom:4px; color:var(--accent); }
+
+  .sample-card{
+    border:1px solid #e5e7eb;
+    border-radius:10px;
+    padding:22px 24px;
+    margin-bottom:16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .sample-card .info b{ font-size:16px; }
+  .sample-card .info p{ margin:6px 0 0; font-size:13.5px; color:var(--muted); }
+  .sample-card .tag{
+    display:inline-block;
+    font-size:11px;
+    background:#eef4fb;
+    color:var(--accent);
+    padding:3px 10px;
+    border-radius:20px;
+    margin-bottom:6px;
+  }
+  .sample-btn{
+    white-space:nowrap;
+    background:var(--accent);
+    color:#fff;
+    font-size:13.5px;
+    font-weight:bold;
+    padding:10px 20px;
+    border-radius:6px;
+    text-decoration:none;
+  }
+  .sample-note{
+    text-align:center;
+    font-size:13px;
+    color:var(--muted);
+    margin-top:18px;
+  }
+
+  .proof-box{
+    background:#fff8ec;
+    border:1px solid #f0dcb2;
+    border-radius:10px;
+    padding:22px 26px;
+    font-size:14.5px;
+  }
+
+  .pricing{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+  .plan{
+    border:2px solid #e5e7eb;
+    border-radius:12px;
+    padding:26px 22px;
+    text-align:center;
+  }
+  .plan.highlight{ border-color:var(--accent2); position:relative; }
+  .plan.highlight .badge{
+    position:absolute;
+    top:-13px; left:50%; transform:translateX(-50%);
+    background:var(--accent2);
+    color:#fff;
+    font-size:11px;
+    padding:4px 14px;
+    border-radius:20px;
+  }
+  .plan h3{ margin:6px 0 4px; font-size:17px; }
+  .plan .price{ font-size:28px; font-weight:bold; color:var(--accent); margin:10px 0 2px; }
+  .plan .price span{ font-size:13px; color:var(--muted); font-weight:normal; }
+  .plan .desc{ font-size:13px; color:var(--muted); margin-bottom:16px; }
+  .plan ul{ text-align:left; font-size:13.5px; padding-left:20px; margin:0; }
+  .plan ul li{ margin-bottom:6px; }
+  .setup-fee{
+    text-align:center;
+    margin-top:20px;
+    font-size:13.5px;
+    color:var(--muted);
+  }
+
+  .steps{ counter-reset:step; list-style:none; padding:0; margin:0; }
+  .steps li{
+    counter-increment:step;
+    position:relative;
+    padding:6px 0 22px 44px;
+    font-size:14.5px;
+    border-left:2px solid #e5e7eb;
+    margin-left:16px;
+  }
+  .steps li:last-child{ border-left:2px solid transparent; padding-bottom:0; }
+  .steps li::before{
+    content:counter(step);
+    position:absolute;
+    left:-17px; top:0;
+    width:32px; height:32px;
+    background:var(--accent);
+    color:#fff;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:bold;
+  }
+
+  .faq-item{ border-bottom:1px solid #e5e7eb; padding:18px 0; }
+  .faq-item summary{
+    cursor:pointer;
+    font-weight:bold;
+    font-size:14.5px;
+    list-style:none;
+  }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary::before{ content:"Q. "; color:var(--accent2); }
+  .faq-item p{ font-size:13.5px; color:var(--muted); margin:10px 0 0; }
+
+  .final-cta{
+    text-align:center;
+    padding:60px 20px 70px;
+    color:#fff;
+  }
+  .final-cta h2{ font-size:22px; margin-bottom:14px; }
+  .final-cta p{ color:#c9d3de; font-size:14px; margin-bottom:28px; }
+
+  footer{
+    text-align:center;
+    font-size:12px;
+    color:#6b7684;
+    padding:24px 20px 40px;
+  }
+  footer a{ color:#9fb4cc; }
+
+  @media (max-width:600px){
+    .feature-grid{ grid-template-columns:1fr; }
+    .pricing{ grid-template-columns:1fr; }
+    header.top h1{ font-size:24px; }
+    .sample-card{ flex-direction:column; align-items:flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="eyebrow">フリラボ | 診断ツールSaaS</div>
+    <h1>「診断してもらう」を、<br>御社の<span class="hi">見込み客が自分から動く</span>入口にします</h1>
+    <p class="lead">士業・美容室・コーチ/コンサル向け。御社専用の診断コンテンツを月額13,000円〜で制作します。実物サンプル3つ、今すぐ体験できます。</p>
+    <a class="cta-btn" href="#contact">お問い合わせ・お申し込みはこちら</a>
+    <div class="cta-sub">入力1分・費用は発生しません</div>
+  </div>
+</header>
+
+<section class="card-section">
+  <div class="wrap">
+    <h2 class="section-title">こんなお悩みはありませんか？</h2>
+    <ul class="pain-list">
+      <li>ホームページやSNSはあるが、「見てもらう」から「問い合わせをもらう」までの導線が弱い</li>
+      <li>自分の強み・サービス内容をうまく言語化できず、初回相談の質にばらつきが出る</li>
+      <li>広告費をかけずに、見込み客が自分から興味を持ってくれる仕組みが欲しい</li>
+    </ul>
+    <div class="lead-in">
+      その入口として今、士業・美容室・コーチング業界などで広がっているのが「診断コンテンツ」です。「あなたはこのタイプです」「あなたの会社にはこのリスクがあります」という診断結果は、訪れた人が"自分ごと"として受け止めやすく、そのまま相談・予約・LINE登録につながりやすい導線になります。
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title" style="color:#fff;">何を作るか</h2>
+    <p class="section-sub" style="color:#93a2b3;">御社の業種・強み・サービス内容に合わせて、オーダーメイドの診断アプリを制作します</p>
+    <div class="feature-grid">
+      <div class="item"><b>オーダーメイド設計</b>設問とスコアリング（または結果パターン）を御社の商材に合わせて設計</div>
+      <div class="item"><b>ブランディング反映</b>配色・ロゴ・屋号など、御社の見た目をそのまま反映</div>
+      <div class="item"><b>誘導導線の設置</b>診断結果から予約フォーム・LINE公式アカウントへ誘導するボタンを設置</div>
+      <div class="item"><b>リード獲得フォーム</b>診断結果ページでのメールアドレス／LINE ID回収フォームを設置</div>
+      <div class="item"><b>簡易アクセス解析</b>何人が診断を始め、何人が最後まで答え、何人がボタンを押したか</div>
+      <div class="item"><b>軽量・低コスト運用</b>サーバー不要の作りで、既存サイトやSNSからリンク1本で利用可能</div>
+    </div>
+  </div>
+</section>
+
+<section class="card-section">
+  <div class="wrap">
+    <h2 class="section-title">まずは実物サンプルをご覧ください</h2>
+    <p class="section-sub">言葉で説明するより、実際に触っていただくのが一番早いと思います。すべて実際に動作します。</p>
+
+    <div class="sample-card">
+      <div class="info">
+        <span class="tag">士業向け</span>
+        <div><b>労務・税務リスク診断</b></div>
+        <p>7つの質問でリスクを点数化し、4段階で診断。専門家への相談を後押しする作りです。</p>
+      </div>
+      <a class="sample-btn" href="https://freelab-jp.github.io/shigyo-diagnosis.html" target="_blank" rel="noopener">サンプルを見る</a>
+    </div>
+
+    <div class="sample-card">
+      <div class="info">
+        <span class="tag">美容室・サロン向け</span>
+        <div><b>肌質・髪質タイプ診断</b></div>
+        <p>5つの質問から5つのタイプに分岐。診断結果からおすすめメニューを提示し、来店予約へつなげます。</p>
+      </div>
+      <a class="sample-btn" href="https://freelab-jp.github.io/beauty-diagnosis.html" target="_blank" rel="noopener">サンプルを見る</a>
+    </div>
+
+    <div class="sample-card">
+      <div class="info">
+        <span class="tag">コーチ・コンサル向け</span>
+        <div><b>学び直し・成長タイプ診断</b></div>
+        <p>6つの質問から4タイプに分岐。個別相談・講座への案内を、診断結果に合わせて出し分けます。</p>
+      </div>
+      <a class="sample-btn" href="https://freelab-jp.github.io/coach-diagnosis.html" target="_blank" rel="noopener">サンプルを見る</a>
+    </div>
+
+    <p class="sample-note">上記以外の業種でも、御社の商材に合わせて一から設計します。まずはお気軽にご相談ください。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title" style="color:#fff;">なぜこの価格でできるのか</h2>
+    <div class="proof-box">
+      一般的にこうした診断・集客ツールの制作は、コンサルティング込みで月数万円〜、初期費用だけで十数万円かかるケースも珍しくありません。私たちは、AIを活用した開発体制により制作スピードを上げることで、この価格を実現しています。安さの裏に「テンプレートの使い回しだけ」という手抜きはありません。設問・スコアロジック・デザインは案件ごとに設計し直します。
+      <br><br>
+      <b>私たちフリラボ自身も、この仕組みで集客しています。</b> フリーランス・個人事業主向けに「収入不安定リスク診断」という自社の無料診断アプリを実際に運用し、SNSでの集客導線として使っています。「診断コンテンツが本当に人を動かすのか」を、他社の事例ではなく自分たちの実践で確かめた上で、このサービスをご提供しています。
+    </div>
+  </div>
+</section>
+
+<section class="card-section">
+  <div class="wrap">
+    <h2 class="section-title">料金プラン</h2>
+    <p class="section-sub">初期登録費用 20,000円（税込・設問設計や実装にかかる制作費として初回のみ）</p>
+    <div class="pricing">
+      <div class="plan">
+        <h3>気づき導線プラン</h3>
+        <div class="price">¥13,000<span>〜／月</span></div>
+        <div class="desc">見込み客に気づいてもらい、相談・予約まで自然に進む導線を作る基本プラン</div>
+        <ul>
+          <li>診断1本（設問5〜7問程度）</li>
+          <li>配色・ロゴ・屋号のブランディング反映</li>
+          <li>CTAボタン1箇所</li>
+          <li>リード獲得フォーム</li>
+          <li>簡易アクセス解析</li>
+        </ul>
+      </div>
+      <div class="plan highlight">
+        <div class="badge">おすすめ</div>
+        <h3>成果伴走プラン</h3>
+        <div class="price">¥25,000<span>〜／月</span></div>
+        <div class="desc">気づいてもらった後の成果まで、一緒に伴走し続ける上位プラン</div>
+        <ul>
+          <li>気づき導線プランの全内容</li>
+          <li>CTA複数箇所の設置</li>
+          <li>アクセス解析の月次レポート</li>
+          <li>診断内容・設問の月1回までの見直し・更新</li>
+        </ul>
+      </div>
+    </div>
+    <p class="setup-fee">月額はいずれもホスティング・保守・軽微な文言修正込みです。制作期間の目安は2〜3週間程度。<br>事業立ち上げ期のため、ご依頼いただける件数に上限を設けて対応しています。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title" style="color:#fff;">ご依頼の流れ</h2>
+    <ol class="steps" style="background:#fff; padding:32px 32px 10px; border-radius:12px;">
+      <li>まずはフォームにて、御社の業種・目的をお聞かせください</li>
+      <li>簡単なヒアリングシートにご記入いただきます</li>
+      <li>設問・スコアロジックの設計案をご提示し、方向性をすり合わせます</li>
+      <li>デザイン反映・実装</li>
+      <li>御社にてご確認いただき、公開</li>
+    </ol>
+  </div>
+</section>
+
+<section class="card-section">
+  <div class="wrap">
+    <h2 class="section-title">よくある質問</h2>
+
+    <details class="faq-item">
+      <summary>本当にうちの業種・商材に合わせて作ってもらえますか？テンプレートを使い回すだけでは？</summary>
+      <p>はい、設問・スコアロジック・デザインは案件ごとに設計し直します。裏側の仕組み（診断エンジンの土台）は共通化していますが、これは同じ質の実装を安定して、かつ早くお届けするための共通化であり、御社に見えている設問・結果・見た目の部分がテンプレートのまま流用されることはありません。公開しているサンプル3つが、実際に業種ごとにどれだけ変わるかの実例です。</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>導入したら、どれくらいの期間でどんな効果が出ますか？</summary>
+      <p>正直にお伝えすると、「診断を設置したら自動的に問い合わせが増える」というものではありません。診断は、訪れた人が自分ごととして受け止めやすく、気軽に反応しやすい入口を作る仕組みであり、実際の反応数は、どこに設置するか、どれくらいの人に見てもらえるかによって変わります。アクセス解析で「何人が診断を始め、何人が最後まで答えたか」を見える化し、改善のヒントをお渡しします。</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>個人情報やお客様の回答データはどう扱われますか？</summary>
+      <p>サンプル3つは現時点でいずれも、診断の回答データをサーバーに送信・保存しない設計です（ブラウザの中だけで処理が完結します）。リード獲得フォームを実際に稼働させる場合は、御社が管理できる外部サービスと連携する形を想定しており、フリラボ側でお客様の個人情報を保管することはありません。</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>途中で内容変更や解約はできますか？</summary>
+      <p>内容の軽微な修正（文言の差し替えなど）は月額の範囲内で対応します。設問自体の作り直しなど大きな変更は都度お見積もりとなります。解約については長期契約の縛りは設けておらず、月単位でのご相談に応じます。</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>診断アプリを設置する場所は自分で決められますか？</summary>
+      <p>はい。納品物はサーバー不要の軽量なWebページ（単一ファイル）のため、既存のホームページに埋め込む、SNSの固定リンクに設置する、LINE公式アカウントのリッチメニューから飛ばすなど、御社の運用に合わせて自由に設置場所を選んでいただけます。</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>初期登録費用20,000円は何のための費用ですか？</summary>
+      <p>御社の業種・商材に合わせて設問とスコアロジックを一から設計し、デザイン・ブランディングを反映して実装するための制作費です。月額はその後のホスティング・保守・更新にかかる費用として、初期の制作費とは別立てにしています。</p>
+    </details>
+  </div>
+</section>
+
+<section class="final-cta" id="contact">
+  <div class="wrap">
+    <h2>まずはお気軽にご相談ください</h2>
+    <p>「うちの業種でもできるか」だけでも構いません。フォームからお問い合わせください。</p>
+    <a class="cta-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSc8JstTHsOjIJxTy-SBaRI4aamJRopRyK5-OJ8N8h39WAE9mA/viewform" target="_blank" rel="noopener">お問い合わせ・お申し込みフォームへ</a>
+    <div class="cta-sub">送信後1〜2日以内にご返信いたします</div>
+  </div>
+</section>
+
+<footer>
+  フリラボ ©2026<br>
+  <a href="https://freelab-jp.github.io/">収入不安定リスク診断（フリラボ本体サイト）</a>
+</footer>
+
+</body>
+</html>
