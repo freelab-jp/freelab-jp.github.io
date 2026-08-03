@@ -72,6 +72,48 @@
     color:#93a2b3;
   }
 
+  .profile-box{
+    display:flex;
+    align-items:center;
+    gap:22px;
+    padding:26px 0;
+  }
+  .profile-box .avatar{
+    width:88px;
+    height:88px;
+    border-radius:50%;
+    flex:none;
+    background:#e5e7eb;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:13px;
+    color:var(--muted);
+  }
+  .profile-box .avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  .profile-box .name{
+    font-size:17px;
+    font-weight:bold;
+  }
+  .profile-box .role{
+    font-size:12.5px;
+    color:var(--accent);
+    margin-bottom:8px;
+  }
+  .profile-box p{
+    font-size:13.5px;
+    color:var(--muted);
+    margin:0;
+  }
+  @media (max-width:600px){
+    .profile-box{ flex-direction:column; text-align:center; }
+  }
+
   section{ padding:52px 0; }
   section.card-section{ background:#fff; }
   h2.section-title{
@@ -261,17 +303,26 @@
 </head>
 <body>
 
-<header class="top">
-  <div class="wrap">
-    <div class="eyebrow">フリラボ | 診断ツールSaaS</div>
-    <h1>「診断してもらう」を、<br>御社の<span class="hi">見込み客が自分から動く</span>入口にします</h1>
-    <p class="lead">士業・美容室・コーチ/コンサル向け。御社専用の診断コンテンツを月額13,000円〜で制作します。実物サンプル3つ、今すぐ体験できます。</p>
+<header class="top" style="padding:0;">
+  <img src="images/lp-header.png" alt="フリラボ | その困りごと、アプリで解決できるかも" style="width:100%; display:block;">
+  <div class="wrap" style="padding:32px 20px 44px; text-align:center;">
     <a class="cta-btn" href="#contact">お問い合わせ・お申し込みはこちら</a>
     <div class="cta-sub">入力1分・費用は発生しません</div>
   </div>
 </header>
 
-<section class="card-section">
+<section class="card-section" style="padding-bottom:10px;">
+  <div class="wrap profile-box">
+    <div class="avatar"><img src="images/profile.png" alt="藤井秀行"></div>
+    <div>
+      <div class="name">藤井秀行</div>
+      <div class="role">フリラボ代表</div>
+      <p>企業・個人事業主の業務課題を、アプリで解決しています。手作業や属人化を、現場に合った仕組みへ。</p>
+    </div>
+  </div>
+</section>
+
+<section class="card-section" style="padding-top:10px;">
   <div class="wrap">
     <h2 class="section-title">こんなお悩みはありませんか？</h2>
     <ul class="pain-list">
